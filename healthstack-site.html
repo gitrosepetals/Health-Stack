@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthStack</title>
+  <meta name="description" content="HealthStack barebones site starter for future customization." />
+  <style>
+    :root {
+      --color-bg: #f7f6f2;
+      --color-surface: #ffffff;
+      --color-surface-2: #f1f5f9;
+      --color-text: #1f2937;
+      --color-text-muted: #6b7280;
+      --color-border: #d1d5db;
+      --color-primary: #0f766e;
+      --color-primary-hover: #115e59;
+      --color-text-inverse: #ffffff;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.5rem;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --content-width: 1100px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #111827;
+      --color-surface: #1f2937;
+      --color-surface-2: #243041;
+      --color-text: #f9fafb;
+      --color-text-muted: #9ca3af;
+      --color-border: #374151;
+      --color-primary: #14b8a6;
+      --color-primary-hover: #0d9488;
+      --color-text-inverse: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.35);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; cursor: pointer; }
+
+    .container {
+      width: min(100% - 2rem, var(--content-width));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 700;
+      font-size: var(--text-lg);
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      display: grid;
+      place-items: center;
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      align-items: center;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .theme-toggle,
+    .button,
+    .button-secondary {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+
+    .button {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .button:hover { background: var(--color-primary-hover); }
+
+    .hero {
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: var(--space-3);
+      padding: 0.35rem 0.7rem;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 0 0 var(--space-4);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0 0 var(--space-6);
+      max-width: 60ch;
+      color: var(--color-text-muted);
+      font-size: var(--text-base);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-card,
+    .section-card,
+    .post-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-card {
+      padding: var(--space-6);
+    }
+
+    .hero-card h2,
+    .section-title {
+      margin: 0 0 var(--space-3);
+      font-size: var(--text-xl);
+    }
+
+    .hero-card ul {
+      padding-left: 1rem;
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+
+    section {
+      padding: var(--space-12) 0;
+    }
+
+    .section-heading {
+      margin: 0 0 var(--space-6);
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: var(--space-4);
+    }
+
+    .section-heading p {
+      margin: var(--space-2) 0 0;
+      color: var(--color-text-muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    .section-card,
+    .post-card {
+      padding: var(--space-5);
+    }
+
+    .section-card h3,
+    .post-card h3 {
+      margin-top: 0;
+      margin-bottom: var(--space-3);
+      font-size: var(--text-lg);
+    }
+
+    .muted {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .newsletter-form input {
+      flex: 1 1 260px;
+      min-height: 48px;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    .footer {
+      padding: var(--space-8) 0;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner,
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="HealthStack home">
+        <span class="brand-mark">HS</span>
+        <span>HealthStack</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#topics">Topics</a>
+        <a href="#posts">Posts</a>
+        <a href="#subscribe">Subscribe</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Barebones starter</span>
+          <h1>HealthStack site starter for future customization.</h1>
+          <p>
+            This is a clean starting point for a health-tech newsletter, content brand, or editorial site.
+            Replace the copy, colors, sections, and forms as your brand evolves.
+          </p>
+
+          <div class="cta-row">
+            <a class="button" href="#subscribe">Primary CTA</a>
+            <a class="button-secondary" href="#posts">Secondary CTA</a>
+          </div>
+
+          <p class="muted">Suggested next edits: logo, hero copy, email form action, article cards, footer links.</p>
+        </div>
+
+        <aside class="hero-card" aria-label="Starter checklist">
+          <h2>Starter checklist</h2>
+          <ul>
+            <li>Replace placeholder copy with brand messaging</li>
+            <li>Connect form to Beehiiv, ConvertKit, or custom backend</li>
+            <li>Add real article links and category pages</li>
+            <li>Swap system font for your chosen font pair</li>
+            <li>Upload to AWS S3 or Amplify with relative asset paths</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2 class="section-title">About section</h2>
+            <p>Use this space for your mission, audience, and editorial positioning.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="section-card">
+            <h3>Mission</h3>
+            <p class="muted">Placeholder copy for what HealthStack covers and why it matters.</p>
+          </article>
+          <article class="section-card">
+            <h3>Audience</h3>
+            <p class="muted">Placeholder copy for students, operators, founders, clinicians, or readers you serve.</p>
+          </article>
+          <article class="section-card">
+            <h3>Format</h3>
+            <p class="muted">Placeholder copy for newsletter cadence, article summaries, interviews, or trend analysis.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2 class="section-title">Topic blocks</h2>
+            <p>Keep, remove, or expand these categories depending on your final direction.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="section-card"><h3>Health Tech</h3><p class="muted">AI, digital health, startups, infrastructure.</p></article>
+          <article class="section-card"><h3>Policy</h3><p class="muted">Regulation, FDA, reimbursement, public health.</p></article>
+          <article class="section-card"><h3>Markets</h3><p class="muted">Biotech, venture activity, operator insights, funding.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="posts">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2 class="section-title">Recent posts</h2>
+            <p>These are placeholder cards ready to be swapped with real content.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="post-card">
+            <p class="muted">Category • Date</p>
+            <h3>Placeholder post title one</h3>
+            <p class="muted">Short summary or teaser text for your first featured story.</p>
+          </article>
+          <article class="post-card">
+            <p class="muted">Category • Date</p>
+            <h3>Placeholder post title two</h3>
+            <p class="muted">Short summary or teaser text for your second featured story.</p>
+          </article>
+          <article class="post-card">
+            <p class="muted">Category • Date</p>
+            <h3>Placeholder post title three</h3>
+            <p class="muted">Short summary or teaser text for your third featured story.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="subscribe">
+      <div class="container">
+        <div class="hero-card">
+          <h2 class="section-title">Subscribe section</h2>
+          <p class="muted">Replace the form action with your email platform endpoint or embed code.</p>
+          <form class="newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email" aria-label="Email address" />
+            <button class="button" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 HealthStack. Barebones AWS-ready starter with simple relative paths.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const button = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      if (button) {
+        button.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', theme);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
