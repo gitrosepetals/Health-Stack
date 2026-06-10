@@ -1,0 +1,161 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Lumen — Static site API (Subscribe, Contact, Articles)
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 15
+    MemorySize: 256
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        CORS_ORIGIN: !Ref CorsOrigin
+        SENTRY_DSN: !Ref SentryDsn
+
+Parameters:
+  CorsOrigin:
+    Type: String
+    Default: "*"
+    Description: Allowed CORS origin (set to your CloudFront domain in production)
+  BeehiivApiKey:
+    Type: String
+    NoEcho: true
+    Default: ""
+  BeehiivPubId:
+    Type: String
+    Default: ""
+  SesFromEmail:
+    Type: String
+    Default: hello@lumen.health
+  SesToEmail:
+    Type: String
+    Default: team@lumen.health
+  ArticlesTableName:
+    Type: String
+    Default: lumen-articles
+  SentryDsn:
+    Type: String
+    Default: ""
+
+Resources:
+  LumenApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref CorsOrigin
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+
+  ArticlesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref ArticlesTableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  SubscribeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../api/
+      Handler: subscribe.handler.lambda_handler
+      Description: POST /subscribe — Beehiiv newsletter signup
+      Environment:
+        Variables:
+          BEEHIIV_API_KEY: !Ref BeehiivApiKey
+          BEEHIIV_PUB_ID: !Ref BeehiivPubId
+      Events:
+        Subscribe:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /subscribe
+            Method: POST
+        SubscribeOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /subscribe
+            Method: OPTIONS
+      Policies:
+        - AWSLambdaBasicExecutionRole
+
+  ContactFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../api/
+      Handler: contact.handler.lambda_handler
+      Description: POST /contact — AWS SES contact form
+      Environment:
+        Variables:
+          SES_FROM_EMAIL: !Ref SesFromEmail
+          SES_TO_EMAIL: !Ref SesToEmail
+      Events:
+        Contact:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /contact
+            Method: POST
+        ContactOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /contact
+            Method: OPTIONS
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ses:SendEmail
+                - ses:SendRawEmail
+              Resource: "*"
+
+  ArticlesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../api/
+      Handler: articles.handler.lambda_handler
+      Description: GET /articles — DynamoDB article feed
+      Environment:
+        Variables:
+          ARTICLES_TABLE: !Ref ArticlesTableName
+      Events:
+        Articles:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /articles
+            Method: GET
+        ArticlesOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LumenApi
+            Path: /articles
+            Method: OPTIONS
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - DynamoDBReadPolicy:
+            TableName: !Ref ArticlesTableName
+
+Outputs:
+  ApiEndpoint:
+    Description: HTTP API endpoint URL
+    Value: !Sub "https://${LumenApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+  ArticlesTableArn:
+    Description: DynamoDB articles table ARN
+    Value: !GetAtt ArticlesTable.Arn

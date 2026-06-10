@@ -1,0 +1,3 @@
+# Download Satoshi and Boska woff2 files from https://www.fontshare.com
+# Place satoshi.woff2 and boska.woff2 in this directory for self-hosted fallback.
+# Fontshare CDN is used as primary; local files activate when present.

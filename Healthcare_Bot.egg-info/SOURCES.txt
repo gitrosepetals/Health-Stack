@@ -1,9 +1,0 @@
-LICENSE
-setup.py
-Healthcare_Bot.egg-info/PKG-INFO
-Healthcare_Bot.egg-info/SOURCES.txt
-Healthcare_Bot.egg-info/dependency_links.txt
-Healthcare_Bot.egg-info/top_level.txt
-src/__init__.py
-src/helper.py
-src/prompt.py
