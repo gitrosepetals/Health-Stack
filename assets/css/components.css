@@ -136,6 +136,11 @@
 }
 
 /* ── Forms ── */
+.newsletter-embed {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
 .newsletter-form {
   display: flex;
   flex-wrap: wrap;

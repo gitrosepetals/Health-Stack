@@ -11,8 +11,12 @@
   var submitBtn = form.querySelector('[type="submit"]');
   var messageEl = form.querySelector(".form-message") || createMessageEl(form);
 
-  /* Set API endpoint via data attribute or default relative path */
+  /* Same-origin /subscribe in prod; SAM local runs on :3000 when using python -m http.server */
   var apiUrl = form.dataset.apiUrl || "/subscribe";
+  var host = window.location.hostname;
+  if (apiUrl === "/subscribe" && (host === "localhost" || host === "127.0.0.1")) {
+    apiUrl = "http://127.0.0.1:3000/subscribe";
+  }
 
   function createMessageEl(parent) {
     var el = document.createElement("p");
@@ -52,9 +56,20 @@
       body: JSON.stringify({ email: email }),
     })
       .then(function (res) {
-        return res.json().then(function (data) {
-          return { ok: res.ok, data: data };
-        });
+        return res
+          .json()
+          .then(function (data) {
+            return { ok: res.ok, data: data };
+          })
+          .catch(function () {
+            return {
+              ok: false,
+              data: {
+                error:
+                  "Subscribe API returned an invalid response. If you're running locally, start the API with sam local start-api.",
+              },
+            };
+          });
       })
       .then(function (result) {
         if (result.ok) {
@@ -65,7 +80,11 @@
         }
       })
       .catch(function () {
-        showMessage("Unable to connect. Try again or use the Beehiiv embed.", "error");
+        var localHint =
+          host === "localhost" || host === "127.0.0.1"
+            ? " Start the API (sam local start-api on port 3000) or uncomment the Beehiiv embed in index.html."
+            : " Try again or use the Beehiiv embed.";
+        showMessage("Unable to connect." + localHint, "error");
       })
       .finally(function () {
         submitBtn.disabled = false;

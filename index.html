@@ -210,23 +210,9 @@
           <h2 id="subscribe-heading">Get smarter about health tech — every Thursday.</h2>
           <p class="subtitle">Join 2,400+ readers. Free forever. Unsubscribe anytime.</p>
 
-          <form
-            class="newsletter-form"
-            method="post"
-            aria-label="Newsletter signup"
-            data-api-url="/subscribe"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="you@company.com"
-              aria-label="Email address"
-              required
-              autocomplete="email"
-            />
-            <button class="btn btn-primary" type="submit">Subscribe</button>
-            <p class="form-message" role="status" aria-live="polite"></p>
-          </form>
+          <div class="newsletter-embed">
+            <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="acc6204b-fa5f-4da1-8f34-813a7a096fae"></script>
+          </div>
 
           <p class="newsletter-fine-print">No spam. No sponsored fluff. Just the briefing.</p>
         </div>
@@ -293,8 +279,5 @@
 
   <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
-  <script src="assets/js/subscribe.js" defer></script>
-
-  <!-- <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="acc6204b-fa5f-4da1-8f34-813a7a096fae"></script>-->
 </body>
 </html>
