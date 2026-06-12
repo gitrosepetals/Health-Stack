@@ -8,7 +8,7 @@ export function httpErrorMessage(err: unknown, fallback: string): string {
 
   // Network / CORS failure (common on Vercel if CORS_ORIGIN is wrong)
   if (httpErr.status === 0 || httpErr.statusText === 'Unknown Error') {
-    return 'Cannot reach the API. Check CORS_ORIGIN on Vercel matches your site URL (https://your-app.vercel.app).';
+    return 'API unreachable. The serverless function may be crashing — check Vercel logs and DATABASE_URL.';
   }
 
   const extracted = extractMessage(httpErr.error);
