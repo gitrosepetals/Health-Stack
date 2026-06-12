@@ -6,7 +6,32 @@
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "functions": {
-    "api/**/*.ts": {
+    "api/health.ts": {
+      "maxDuration": 10
+    },
+    "api/articles.ts": {
+      "maxDuration": 30,
+      "includeFiles": "node_modules/.prisma/**"
+    },
+    "api/subscribe.ts": {
+      "maxDuration": 30
+    },
+    "api/contact.ts": {
+      "maxDuration": 30
+    },
+    "api/admin/auth/login.ts": {
+      "maxDuration": 30,
+      "includeFiles": "node_modules/.prisma/**"
+    },
+    "api/admin/auth/me.ts": {
+      "maxDuration": 30,
+      "includeFiles": "node_modules/.prisma/**"
+    },
+    "api/admin/articles/index.ts": {
+      "maxDuration": 30,
+      "includeFiles": "node_modules/.prisma/**"
+    },
+    "api/admin/articles/[id].ts": {
       "maxDuration": 30,
       "includeFiles": "node_modules/.prisma/**"
     }

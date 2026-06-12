@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { env, EMAIL_RE } from '../server/src/lib/env';
-import { methodNotAllowed, withApi } from './lib/cors';
+import { methodNotAllowed, withApi } from '../lib/vercel-api/cors';
 
 async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   if (req.method !== 'POST') {

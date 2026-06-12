@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { prisma } from '../../../server/src/db/prisma';
 import { serializeArticle } from '../../../server/src/lib/serialize';
-import { AuthError, requireAuth } from '../../lib/auth';
-import { methodNotAllowed, withApi } from '../../lib/cors';
+import { AuthError, requireAuth } from '../../../lib/vercel-api/auth';
+import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
 
 function paramId(req: VercelRequest): string {
   const id = req.query.id;

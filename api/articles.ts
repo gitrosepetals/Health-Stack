@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { prisma } from '../server/src/db/prisma';
 import { getArticles } from '../server/src/data/articles';
 import { serializeArticle } from '../server/src/lib/serialize';
-import { methodNotAllowed, withApi } from './lib/cors';
+import { methodNotAllowed, withApi } from '../lib/vercel-api/cors';
 
 async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   if (req.method !== 'GET') {

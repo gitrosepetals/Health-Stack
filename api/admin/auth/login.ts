@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt, { type SignOptions } from 'jsonwebtoken';
 import { prisma } from '../../../server/src/db/prisma';
 import { env, EMAIL_RE } from '../../../server/src/lib/env';
-import { methodNotAllowed, withApi } from '../../lib/cors';
+import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
 
 async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   if (req.method !== 'POST') {
