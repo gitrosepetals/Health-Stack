@@ -3,11 +3,10 @@
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist/lumen/browser",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "functions": {
-    "api/index.ts": {
+    "api/**/*.ts": {
       "maxDuration": 30,
       "includeFiles": "node_modules/.prisma/**"
     }
