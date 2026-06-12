@@ -1,10 +1,9 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { prisma } from '../../../server/src/db/prisma';
-import { serializeArticle } from '../../../server/src/lib/serialize';
-import { AuthError, requireAuth } from '../../../lib/vercel-api/auth';
-import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
+const { prisma } = require('../../../server/dist/db/prisma');
+const { serializeArticle } = require('../../../server/dist/lib/serialize');
+const { AuthError, requireAuth } = require('../../../lib/vercel-api/auth');
+const { withApi, methodNotAllowed } = require('../../../lib/vercel-api/cors');
 
-function slugify(text: string): string {
+function slugify(text) {
   return text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
@@ -12,7 +11,7 @@ function slugify(text: string): string {
     .slice(0, 80);
 }
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   try {
     requireAuth(req);
   } catch (err) {
@@ -63,6 +62,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   }
 
   methodNotAllowed(res, ['GET', 'POST']);
-}
-
-export default withApi(handler);
+});

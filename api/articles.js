@@ -1,10 +1,9 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { prisma } from '../server/src/db/prisma';
-import { getArticles } from '../server/src/data/articles';
-import { serializeArticle } from '../server/src/lib/serialize';
-import { methodNotAllowed, withApi } from '../lib/vercel-api/cors';
+const { prisma } = require('../server/dist/db/prisma');
+const { getArticles } = require('../server/dist/data/articles');
+const { serializeArticle } = require('../server/dist/lib/serialize');
+const { withApi, methodNotAllowed } = require('../lib/vercel-api/cors');
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   if (req.method !== 'GET') {
     methodNotAllowed(res, ['GET']);
     return;
@@ -29,6 +28,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   }
 
   res.status(200).json({ articles: getArticles(limit) });
-}
-
-export default withApi(handler);
+});

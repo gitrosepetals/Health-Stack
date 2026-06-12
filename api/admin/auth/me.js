@@ -1,9 +1,8 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { prisma } from '../../../server/src/db/prisma';
-import { AuthError, requireAuth } from '../../../lib/vercel-api/auth';
-import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
+const { prisma } = require('../../../server/dist/db/prisma');
+const { AuthError, requireAuth } = require('../../../lib/vercel-api/auth');
+const { withApi, methodNotAllowed } = require('../../../lib/vercel-api/cors');
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   if (req.method !== 'GET') {
     methodNotAllowed(res, ['GET']);
     return;
@@ -29,6 +28,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
     }
     throw err;
   }
-}
-
-export default withApi(handler);
+});

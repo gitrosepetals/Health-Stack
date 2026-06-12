@@ -1,15 +1,14 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { prisma } from '../../../server/src/db/prisma';
-import { serializeArticle } from '../../../server/src/lib/serialize';
-import { AuthError, requireAuth } from '../../../lib/vercel-api/auth';
-import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
+const { prisma } = require('../../../server/dist/db/prisma');
+const { serializeArticle } = require('../../../server/dist/lib/serialize');
+const { AuthError, requireAuth } = require('../../../lib/vercel-api/auth');
+const { withApi, methodNotAllowed } = require('../../../lib/vercel-api/cors');
 
-function paramId(req: VercelRequest): string {
+function paramId(req) {
   const id = req.query.id;
   return Array.isArray(id) ? id[0] : (id ?? '');
 }
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   try {
     requireAuth(req);
   } catch (err) {
@@ -97,6 +96,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   }
 
   methodNotAllowed(res, ['GET', 'PUT', 'DELETE']);
-}
-
-export default withApi(handler);
+});

@@ -1,11 +1,10 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import bcrypt from 'bcryptjs';
-import jwt, { type SignOptions } from 'jsonwebtoken';
-import { prisma } from '../../../server/src/db/prisma';
-import { env, EMAIL_RE } from '../../../server/src/lib/env';
-import { methodNotAllowed, withApi } from '../../../lib/vercel-api/cors';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { prisma } = require('../../../server/dist/db/prisma');
+const { env, EMAIL_RE } = require('../../../server/dist/lib/env');
+const { withApi, methodNotAllowed } = require('../../../lib/vercel-api/cors');
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   if (req.method !== 'POST') {
     methodNotAllowed(res, ['POST']);
     return;
@@ -35,7 +34,7 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
     const token = jwt.sign(
       { sub: admin.id, email: admin.email },
       env.jwtSecret,
-      { expiresIn: env.jwtExpiresIn as SignOptions['expiresIn'] }
+      { expiresIn: env.jwtExpiresIn }
     );
 
     res.status(200).json({
@@ -48,6 +47,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
       error: 'Database unavailable. Check DATABASE_URL on Vercel and run db:setup.',
     });
   }
-}
-
-export default withApi(handler);
+});

@@ -1,10 +1,9 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { env, EMAIL_RE } from '../server/src/lib/env';
-import { methodNotAllowed, withApi } from '../lib/vercel-api/cors';
+const { env, EMAIL_RE } = require('../server/dist/lib/env');
+const { withApi, methodNotAllowed } = require('../lib/vercel-api/cors');
 
 const BEEHIIV_BASE = 'https://api.beehiiv.com/v2';
 
-async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+module.exports = withApi(async (req, res) => {
   if (req.method !== 'POST') {
     methodNotAllowed(res, ['POST']);
     return;
@@ -53,6 +52,4 @@ async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   } catch {
     res.status(502).json({ error: 'Unable to reach newsletter service.' });
   }
-}
-
-export default withApi(handler);
+});
