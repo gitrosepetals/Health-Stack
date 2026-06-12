@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AdminArticlesService } from '../../../services/admin-articles.service';
+import { httpErrorMessage } from '../../../lib/http-error';
 
 @Component({
   selector: 'app-admin-article-form',
@@ -73,7 +74,7 @@ export class AdminArticleFormComponent implements OnInit {
     request$.subscribe({
       next: () => this.router.navigate(['/admin']),
       error: (err) => {
-        this.error.set(err.error?.error ?? 'Failed to save article.');
+        this.error.set(httpErrorMessage(err, 'Failed to save article.'));
         this.saving.set(false);
       },
     });

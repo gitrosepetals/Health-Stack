@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AdminAuthService } from '../../../services/admin-auth.service';
+import { httpErrorMessage } from '../../../lib/http-error';
 
 @Component({
   selector: 'app-admin-login',
@@ -33,7 +34,7 @@ export class AdminLoginComponent {
     this.auth.login(email, password).subscribe({
       next: () => this.router.navigate(['/admin']),
       error: (err) => {
-        this.error.set(err.error?.error ?? 'Login failed. Please try again.');
+        this.error.set(httpErrorMessage(err, 'Login failed. Please try again.'));
         this.loading.set(false);
       },
     });
