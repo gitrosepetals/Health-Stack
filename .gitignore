@@ -3,24 +3,18 @@
 .env.local
 .env.*.local
 
-# Python
+# Node / Angular
+node_modules/
+dist/
+server/dist/
+.angular/
+.vercel/
+
+# Python (legacy)
 __pycache__/
 *.py[cod]
-*$py.class
-*.egg-info/
-.eggs/
-dist/
-build/
 .venv/
 venv/
-.python-version
-
-# AWS SAM
-.aws-sam/
-samconfig.toml
-
-# Node (if added later)
-node_modules/
 
 # OS / IDE
 .DS_Store
@@ -29,12 +23,6 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
-
-# Test / coverage
-.coverage
-htmlcov/
-.pytest_cache/
-.mypy_cache/
 
 # Logs
 *.log

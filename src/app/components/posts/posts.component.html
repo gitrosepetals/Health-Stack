@@ -1,0 +1,48 @@
+<section id="posts" class="section-alt" aria-labelledby="posts-heading">
+  <div class="container">
+    <div class="section-heading" appReveal>
+      <span class="section-label">Featured</span>
+      <h2 id="posts-heading">Latest from the briefing.</h2>
+      <p>Recent issues — sharp reads you can finish before your coffee gets cold.</p>
+    </div>
+
+    @if (featured(); as lead) {
+      <div class="posts-grid">
+        <article class="card post-card post-featured" appReveal>
+          <span class="post-tag">{{ lead.category }}</span>
+          <div class="post-meta">
+            <time [attr.datetime]="lead.published_at">{{ lead.published_at | date: 'mediumDate' }}</time>
+            <span>5 min read</span>
+          </div>
+          <h3>{{ lead.title }}</h3>
+          <p class="summary">{{ lead.summary }}</p>
+          <a class="read-more" [href]="lead.url" [attr.aria-label]="'Read: ' + lead.title">
+            Read more
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </article>
+
+        @for (article of rest(); track article.id; let i = $index) {
+          <article class="card post-card" appReveal [attr.data-reveal-delay]="i + 1">
+            <span class="post-tag">{{ article.category }}</span>
+            <div class="post-meta">
+              <time [attr.datetime]="article.published_at">{{ article.published_at | date: 'mediumDate' }}</time>
+            </div>
+            <h3>{{ article.title }}</h3>
+            <p class="summary">{{ article.summary }}</p>
+            <a class="read-more" [href]="article.url" [attr.aria-label]="'Read: ' + article.title">
+              Read more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
