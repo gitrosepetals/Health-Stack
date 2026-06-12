@@ -1,0 +1,70 @@
+<div class="admin-page">
+  <header class="admin-page-header">
+    <div>
+      <a class="admin-back" routerLink="/admin">← Back to articles</a>
+      <h1>{{ isEdit() ? 'Edit article' : 'New article' }}</h1>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <p class="admin-muted">Loading…</p>
+  } @else {
+    <form class="admin-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="admin-form-grid">
+        <label class="admin-form-full">
+          Title
+          <input type="text" formControlName="title" placeholder="Article headline" />
+        </label>
+
+        <label>
+          Slug
+          <input type="text" formControlName="slug" placeholder="auto-generated from title" />
+        </label>
+
+        <label>
+          Category
+          <select formControlName="category">
+            <option value="">Select category</option>
+            <option value="Health Tech">Health Tech</option>
+            <option value="Policy">Policy</option>
+            <option value="Markets">Markets</option>
+          </select>
+        </label>
+
+        <label>
+          Status
+          <select formControlName="status">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+          </select>
+        </label>
+
+        <label>
+          Published date
+          <input type="date" formControlName="published_at" />
+        </label>
+
+        <label>
+          URL
+          <input type="text" formControlName="url" placeholder="#" />
+        </label>
+
+        <label class="admin-form-full">
+          Summary
+          <textarea formControlName="summary" rows="5" placeholder="Brief description for the card…"></textarea>
+        </label>
+      </div>
+
+      @if (error()) {
+        <p class="admin-error" role="alert">{{ error() }}</p>
+      }
+
+      <div class="admin-form-actions">
+        <a class="btn btn-secondary" routerLink="/admin">Cancel</a>
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid || saving()">
+          {{ saving() ? 'Saving…' : (isEdit() ? 'Update article' : 'Create article') }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

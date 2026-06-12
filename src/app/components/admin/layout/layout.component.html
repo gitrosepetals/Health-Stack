@@ -1,0 +1,23 @@
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <a class="admin-sidebar-brand" routerLink="/">
+      <img src="images/logo.svg" width="32" height="32" alt="" />
+      <span>Lumen CMS</span>
+    </a>
+
+    <nav class="admin-nav">
+      <a routerLink="/admin" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Articles</a>
+      <a routerLink="/admin/articles/new" routerLinkActive="is-active">New article</a>
+      <a routerLink="/" class="admin-nav-muted">← View site</a>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <p class="admin-user">{{ auth.admin()?.email }}</p>
+      <button type="button" class="btn btn-secondary btn-sm" (click)="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <router-outlet />
+  </main>
+</div>

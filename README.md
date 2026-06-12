@@ -2,29 +2,20 @@
 
 **Your weekly dose of health tech intelligence.**
 
-Angular frontend + Node.js (Express) API, deployable on Vercel.
+Angular frontend + Node.js (Express) API + CMS admin dashboard, deployable on Vercel.
 
 ## Project structure
 
 ```
-├── src/                    # Angular application
-│   ├── app/
-│   │   ├── components/     # Page sections (hero, posts, etc.)
-│   │   ├── services/       # Theme, articles
-│   │   └── directives/     # Scroll reveal
-│   └── styles/             # Global CSS
+├── src/                    # Angular application (public site + admin CMS)
 ├── server/                 # Node.js Express API
 │   └── src/
-│       ├── index.ts        # Standalone server entry (local / Node hosting)
-│       ├── app.ts          # Express app factory (shared with Vercel)
-│       ├── routes/         # subscribe, contact, articles
-│       ├── data/           # Article seed data
-│       └── lib/            # Env helpers
-├── api/
-│   └── index.ts            # Vercel serverless entry → exports Express app
-├── public/                 # Static assets
-├── vercel.json
-└── angular.json
+│       ├── routes/admin/   # Protected CMS routes (JWT)
+│       ├── middleware/     # Auth middleware
+│       └── db/             # Prisma client
+├── prisma/                 # Database schema & seed
+├── api/index.ts            # Vercel serverless entry
+└── public/
 ```
 
 ## Local development
@@ -34,34 +25,60 @@ Angular frontend + Node.js (Express) API, deployable on Vercel.
 - Node.js 20+
 - npm 10+
 
-### Install
+### Install & database setup
 
 ```bash
 npm install
-cp .env.example .env   # fill in your keys
+cp .env.example .env
+npm run db:setup    # creates SQLite DB + seeds admin + articles
 ```
 
-### Run full stack (Angular + Node API)
+Default admin credentials (change in `.env` before seeding):
+
+- **Email:** `admin@lumen.health`
+- **Password:** `changeme123`
+
+### Run full stack
 
 ```bash
 npm run dev
 # Web  → http://localhost:4200
+# CMS  → http://localhost:4200/admin/login
 # API  → http://localhost:3001
 ```
 
-Angular proxies `/api/*` to the Node server via `proxy.conf.json`.
+## CMS Admin Dashboard
 
-### Run separately
+| URL | Description |
+|-----|-------------|
+| `/admin/login` | Admin sign-in (bcrypt + JWT) |
+| `/admin` | Article list with filters |
+| `/admin/articles/new` | Create article |
+| `/admin/articles/:id/edit` | Edit article |
 
-```bash
-npm start          # Angular only → :4200
-npm run server     # Node API only → :3001
-```
+### Admin API (requires `Authorization: Bearer <token>`)
 
-### Environment variables
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/admin/auth/login` | Login, returns JWT |
+| GET | `/api/admin/auth/me` | Verify session |
+| GET | `/api/admin/articles` | List all articles |
+| POST | `/api/admin/articles` | Create article |
+| GET | `/api/admin/articles/:id` | Get article |
+| PUT | `/api/admin/articles/:id` | Update article |
+| DELETE | `/api/admin/articles/:id` | Delete article |
+
+Public site reads published articles from `GET /api/articles`.
+
+## Environment variables
 
 | Variable | Used by | Description |
 |----------|---------|-------------|
+| `DATABASE_URL` | CMS | SQLite locally (`file:./prisma/dev.db`); Postgres on Vercel |
+| `JWT_SECRET` | CMS | Secret for signing admin tokens |
+| `JWT_EXPIRES_IN` | CMS | Token expiry (default `8h`) |
+| `ADMIN_EMAIL` | Seed | Initial admin email |
+| `ADMIN_PASSWORD` | Seed | Initial admin password |
 | `PORT` | Node server | API port (default `3001`) |
 | `BEEHIIV_API_KEY` | Subscribe | Beehiiv API bearer token |
 | `BEEHIIV_PUB_ID` | Subscribe | Publication UUID |
@@ -73,47 +90,25 @@ npm run server     # Node API only → :3001
 ## Deploy to Vercel
 
 1. Push to GitHub and import in [Vercel](https://vercel.com/new).
-2. Confirm build settings:
-   - **Build command:** `npm run build`
-   - **Output directory:** `dist/lumen/browser`
-3. Add environment variables from the table above.
-4. Deploy.
+2. Add a **Postgres** database (Neon/Vercel Postgres) and set `DATABASE_URL`.
+3. Set `JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` and run seed once.
+4. Deploy with build command `npm run build`.
 
-Vercel routes all `/api/*` requests to `api/index.ts`, which runs the same Express app from `server/`.
-
-```bash
-vercel
-vercel --prod
-```
-
-## Node.js production (optional)
-
-Build and run the API as a standalone Node process (e.g. Railway, Render, Fly.io):
-
-```bash
-npm run build:server
-node server/dist/index.js
-```
-
-Serve the Angular build from `dist/lumen/browser` with any static host, pointing `/api` at your Node server.
+> SQLite does not work on Vercel serverless. Use PostgreSQL in production.
 
 ## API endpoints
 
 ```bash
-# Health check
-curl http://localhost:3001/api/health
-
-# Subscribe
-curl -X POST http://localhost:3001/api/subscribe \
+# Login
+curl -X POST http://localhost:3001/api/admin/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com"}'
+  -d '{"email":"admin@lumen.health","password":"changeme123"}'
 
-# Contact
-curl -X POST http://localhost:3001/api/contact \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Jane","email":"jane@example.com","message":"Hello from Lumen."}'
+# List articles (authenticated)
+curl http://localhost:3001/api/admin/articles \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
 
-# Articles
+# Public articles
 curl http://localhost:3001/api/articles
 ```
 

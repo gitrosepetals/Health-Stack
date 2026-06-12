@@ -1,0 +1,66 @@
+<div class="admin-page">
+  <header class="admin-page-header">
+    <div>
+      <h1>Articles</h1>
+      <p>Manage briefing content shown on the public site.</p>
+    </div>
+    <a class="btn btn-primary" routerLink="/admin/articles/new">+ New article</a>
+  </header>
+
+  <div class="admin-filters">
+    <button type="button" [class.is-active]="filter() === 'all'" (click)="setFilter('all')">All</button>
+    <button type="button" [class.is-active]="filter() === 'published'" (click)="setFilter('published')">Published</button>
+    <button type="button" [class.is-active]="filter() === 'draft'" (click)="setFilter('draft')">Drafts</button>
+  </div>
+
+  @if (loading()) {
+    <p class="admin-muted">Loading articles…</p>
+  } @else if (articles().length === 0) {
+    <div class="admin-empty">
+      <p>No articles yet.</p>
+      <a class="btn btn-primary" routerLink="/admin/articles/new">Create your first article</a>
+    </div>
+  } @else {
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Published</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (article of articles(); track article.db_id ?? article.slug) {
+            <tr>
+              <td>
+                <strong>{{ article.title }}</strong>
+                <span class="admin-slug">{{ article.slug }}</span>
+              </td>
+              <td>{{ article.category }}</td>
+              <td>
+                <span class="admin-badge" [class.admin-badge--published]="article.status === 'published'">
+                  {{ article.status }}
+                </span>
+              </td>
+              <td>{{ article.published_at | date: 'mediumDate' }}</td>
+              <td class="admin-actions">
+                <a class="btn btn-secondary btn-sm" [routerLink]="['/admin/articles', article.db_id ?? article.slug, 'edit']">Edit</a>
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm admin-btn-danger"
+                  [disabled]="deleting() === (article.db_id ?? article.slug)"
+                  (click)="deleteArticle(article)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

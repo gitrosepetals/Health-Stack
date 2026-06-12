@@ -4,6 +4,7 @@ import { env } from './lib/env';
 import { subscribeRouter } from './routes/subscribe';
 import { contactRouter } from './routes/contact';
 import { articlesRouter } from './routes/articles';
+import { adminRouter } from './routes/admin';
 
 export function createApp(): Express {
   const app = express();
@@ -11,7 +12,7 @@ export function createApp(): Express {
   app.use(
     cors({
       origin: env.corsOrigin,
-      methods: ['GET', 'POST', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     })
   );
@@ -25,6 +26,7 @@ export function createApp(): Express {
   app.use('/api/subscribe', subscribeRouter);
   app.use('/api/contact', contactRouter);
   app.use('/api/articles', articlesRouter);
+  app.use('/api/admin', adminRouter);
 
   return app;
 }
