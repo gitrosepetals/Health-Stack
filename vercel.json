@@ -6,7 +6,7 @@
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "functions": {
-    "api/health.ts": {
+    "api/health.js": {
       "maxDuration": 10
     },
     "api/articles.ts": {
