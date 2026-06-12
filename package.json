@@ -12,6 +12,7 @@
     "server": "tsx server/src/index.ts",
     "dev": "concurrently -n web,api -c blue,green \"ng serve\" \"npm run start:api\"",
     "build": "prisma generate && ng build && npm run build:server",
+    "build:vercel": "prisma generate && ng build",
     "build:server": "tsc -p server/tsconfig.json",
     "build:web": "ng build",
     "watch": "ng build --watch --configuration development",
