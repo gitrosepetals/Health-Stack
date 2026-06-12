@@ -1,28 +1,41 @@
 :root {
-  --color-bg: #f7f6f2;
+  --color-bg: #faf9f6;
+  --color-bg-alt: #f3f1ec;
   --color-surface: #ffffff;
-  --color-surface-2: #f0eeea;
-  --color-text: #1a1f2e;
-  --color-text-muted: #5c6370;
-  --color-border: #e2dfd8;
-  --color-primary: #0f766e;
-  --color-primary-hover: #115e59;
-  --color-primary-light: #ccfbf1;
+  --color-surface-2: #eeede8;
+  --color-text: #12151c;
+  --color-text-muted: #5a6170;
+  --color-border: #e4e1da;
+  --color-border-subtle: #eceae4;
+
+  --color-primary: #0d6b63;
+  --color-primary-hover: #0a5650;
+  --color-primary-light: #d4f5f0;
+  --color-primary-glow: rgba(13, 107, 99, 0.18);
   --color-text-inverse: #ffffff;
-  --color-accent: #d97706;
-  --color-error: #dc2626;
-  --color-success: #16a34a;
+  --color-accent: #c47d0e;
+  --color-accent-light: #fef3c7;
+
+  --gradient-hero: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary) 8%, var(--color-bg)) 0%,
+    var(--color-bg) 40%,
+    color-mix(in srgb, var(--color-accent) 6%, var(--color-bg)) 100%
+  );
+  --gradient-primary: linear-gradient(135deg, #0d6b63 0%, #0f8a7f 50%, #12a89a 100%);
+  --gradient-text: linear-gradient(135deg, #0d6b63 0%, #0f9b8e 100%);
 
   --font-body: "Satoshi", system-ui, -apple-system, sans-serif;
-  --font-display: "Boska", Georgia, serif;
+  --font-display: "Boska", Georgia, "Times New Roman", serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+  --text-2xl: clamp(1.5rem, 3vw, 2rem);
+  --text-3xl: clamp(2.5rem, 6vw, 4rem);
+  --text-4xl: clamp(3rem, 8vw, 5rem);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -35,33 +48,59 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
+  --space-24: 6rem;
 
   --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --content-width: 1120px;
-  --header-height: 4.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.1);
-  --transition: 0.2s ease;
+  --content-width: 1140px;
+  --header-height: 4.25rem;
+
+  --shadow-xs: 0 1px 2px rgba(18, 21, 28, 0.04);
+  --shadow-sm: 0 2px 8px rgba(18, 21, 28, 0.06);
+  --shadow-md: 0 8px 24px rgba(18, 21, 28, 0.08);
+  --shadow-lg: 0 16px 48px rgba(18, 21, 28, 0.1);
+  --shadow-xl: 0 24px 64px rgba(18, 21, 28, 0.12);
+  --shadow-glow: 0 0 80px var(--color-primary-glow);
+
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --z-header: 100;
 }
 
 [data-theme="dark"] {
-  --color-bg: #0f1419;
-  --color-surface: #1a222d;
-  --color-surface-2: #232d3b;
-  --color-text: #f0f2f5;
-  --color-text-muted: #9aa3b2;
-  --color-border: #2e3a4a;
+  --color-bg: #0c0f14;
+  --color-bg-alt: #12161e;
+  --color-surface: #171c26;
+  --color-surface-2: #1e2530;
+  --color-text: #f2f4f7;
+  --color-text-muted: #8b95a5;
+  --color-border: #2a3342;
+  --color-border-subtle: #222a38;
+
   --color-primary: #2dd4bf;
-  --color-primary-hover: #14b8a6;
+  --color-primary-hover: #5eead4;
   --color-primary-light: #134e4a;
-  --color-text-inverse: #0f1419;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --color-primary-glow: rgba(45, 212, 191, 0.12);
+  --color-text-inverse: #0c0f14;
+  --color-accent: #fbbf24;
+  --color-accent-light: #422006;
+
+  --gradient-hero: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary) 6%, var(--color-bg)) 0%,
+    var(--color-bg) 50%,
+    color-mix(in srgb, var(--color-accent) 4%, var(--color-bg)) 100%
+  );
+  --gradient-primary: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #2dd4bf 100%);
+  --gradient-text: linear-gradient(135deg, #2dd4bf 0%, #5eead4 100%);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.4);
 }

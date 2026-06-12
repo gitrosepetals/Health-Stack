@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lumen — Your weekly dose of health tech intelligence</title>
   <meta name="description" content="Lumen delivers sharp, Axios-style briefs on health tech, policy, and biotech markets — built for students, operators, and early-career professionals." />
-  <meta name="theme-color" content="#0f766e" />
+  <meta name="theme-color" content="#0d6b63" />
 
   <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
   <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml" />
@@ -33,7 +33,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Lumen home">
-        <img class="brand-logo" src="assets/images/logo.svg" width="38" height="38" alt="" />
+        <img class="brand-logo" src="assets/images/logo.svg" width="36" height="36" alt="" />
         <span>Lumen</span>
       </a>
 
@@ -49,7 +49,6 @@
         <a href="#about">About</a>
         <a href="#topics">Topics</a>
         <a href="#posts">Posts</a>
-        <a href="#subscribe">Subscribe</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -66,55 +65,150 @@
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
         </button>
+        <div class="nav-cta">
+          <a class="btn btn-primary btn-sm" href="#subscribe">Subscribe</a>
+        </div>
       </nav>
     </div>
   </header>
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="container hero-content">
-        <span class="eyebrow">Free weekly newsletter</span>
-        <h1 id="hero-heading">Health tech, decoded.</h1>
-        <p class="hero-tagline">Your weekly dose of health tech intelligence.</p>
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <span class="eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            Free weekly newsletter
+          </span>
+          <h1 id="hero-heading">Health tech, <span class="text-gradient">decoded.</span></h1>
+          <p class="hero-tagline">Your weekly dose of health tech intelligence — sharp briefs on AI, policy, and biotech markets, delivered every Thursday.</p>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#subscribe">Subscribe Free</a>
-          <a class="btn btn-secondary" href="#posts">Read Latest</a>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#subscribe">Subscribe Free</a>
+            <a class="btn btn-secondary" href="#posts">Read Latest</a>
+          </div>
+
+          <div class="social-proof" aria-label="Subscriber count">
+            <div class="subscriber-avatars" aria-hidden="true">
+              <span>JD</span>
+              <span>MK</span>
+              <span>AL</span>
+              <span>+</span>
+            </div>
+            <p>Join <strong>2,400+</strong> students, operators &amp; investors</p>
+          </div>
         </div>
 
-        <div class="social-proof" aria-label="Subscriber count">
-          <div class="subscriber-avatars" aria-hidden="true">
-            <span>JD</span>
-            <span>MK</span>
-            <span>AL</span>
-            <span>+</span>
+        <div class="hero-preview" data-reveal data-reveal-delay="2" aria-hidden="true">
+          <div class="preview-card">
+            <div class="preview-header">
+              <div class="preview-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="preview-label">Issue #47 · Thu, Jun 12</span>
+            </div>
+            <div class="preview-body">
+              <span class="preview-issue">This week</span>
+              <h3>The briefing in 5 minutes</h3>
+              <div class="preview-stories">
+                <div class="preview-story">
+                  <span class="preview-story-num">1</span>
+                  <p>
+                    Ambient clinical AI crosses the adoption chasm
+                    <span>Health Tech · 2 min read</span>
+                  </p>
+                </div>
+                <div class="preview-story">
+                  <span class="preview-story-num">2</span>
+                  <p>
+                    CMS prior-auth rule: what operators need now
+                    <span>Policy · 1 min read</span>
+                  </p>
+                </div>
+                <div class="preview-story">
+                  <span class="preview-story-num">3</span>
+                  <p>
+                    Biotech Q1 in 6 charts
+                    <span>Markets · 2 min read</span>
+                  </p>
+                </div>
+              </div>
+              <div class="preview-footer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+                Plus: one chart worth knowing &amp; a fellowship worth bookmarking
+              </div>
+            </div>
           </div>
-          <p>Join <strong>2,400+</strong> students, operators &amp; investors</p>
         </div>
       </div>
     </section>
 
-    <section id="about" aria-labelledby="about-heading">
+    <div class="stats-bar">
       <div class="container">
-        <div class="section-heading">
+        <div class="stats-inner" data-reveal>
+          <div class="stat-item">
+            <span class="stat-value">2,400+</span>
+            <span class="stat-label">Readers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">100+</span>
+            <span class="stat-label">Briefs published</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">Thu</span>
+            <span class="stat-label">Every week</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$0</span>
+            <span class="stat-label">Always free</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="section-alt" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-heading section-heading--center" data-reveal>
           <span class="section-label">About</span>
           <h2 id="about-heading">Built for people who move health tech forward.</h2>
           <p>We cut through the noise so you can stay ahead — whether you're breaking in or already operating.</p>
         </div>
 
         <div class="grid-3">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">◎</div>
+          <article class="card" data-reveal data-reveal-delay="1">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
             <h3>Mission</h3>
             <p>Deliver the signal on health tech — AI, digital health, biotech, and policy — in briefs you can read in five minutes and reference all week.</p>
           </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">◈</div>
+          <article class="card" data-reveal data-reveal-delay="2">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
             <h3>Audience</h3>
             <p>Health tech students, pre-med and pre-optometry tracks, healthcare operators, and early-career biotech investors who need context, not clutter.</p>
           </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">▣</div>
+          <article class="card" data-reveal data-reveal-delay="3">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
             <h3>Format</h3>
             <p>One email, every Thursday. Axios-style smart brevity: top stories, quick takes, one chart worth knowing, and a job or fellowship worth bookmarking.</p>
           </article>
@@ -124,48 +218,73 @@
 
     <section id="topics" aria-labelledby="topics-heading">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading section-heading--center" data-reveal>
           <span class="section-label">Topics</span>
           <h2 id="topics-heading">Three lanes. One coherent picture.</h2>
           <p>Every issue spans the domains that actually shape how health tech gets built, funded, and regulated.</p>
         </div>
 
         <div class="grid-3">
-          <article class="card topic-card">
-            <div class="card-icon" aria-hidden="true">⚡</div>
+          <article class="card topic-card" data-reveal data-reveal-delay="1">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
             <h3>Health Tech</h3>
             <p>AI in clinical workflows, digital health infrastructure, startup launches, EHR interoperability, and the tools reshaping care delivery.</p>
-            <span class="topic-count">40+ briefs</span>
+            <span class="topic-count">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+              40+ briefs
+            </span>
           </article>
-          <article class="card topic-card">
-            <div class="card-icon" aria-hidden="true">⚖</div>
+          <article class="card topic-card" data-reveal data-reveal-delay="2">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
             <h3>Policy &amp; Regulation</h3>
             <p>FDA clearances, CMS reimbursement shifts, HIPAA updates, state-level telehealth rules, and the policy moves that change your roadmap.</p>
-            <span class="topic-count">30+ briefs</span>
+            <span class="topic-count">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+              30+ briefs
+            </span>
           </article>
-          <article class="card topic-card">
-            <div class="card-icon" aria-hidden="true">◆</div>
+          <article class="card topic-card" data-reveal data-reveal-delay="3">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
             <h3>Markets &amp; Biotech</h3>
             <p>Venture rounds, IPO windows, pipeline readouts, operator playbooks, and the macro signals biotech investors watch first.</p>
-            <span class="topic-count">35+ briefs</span>
+            <span class="topic-count">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+              35+ briefs
+            </span>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="posts" aria-labelledby="posts-heading">
+    <section id="posts" class="section-alt" aria-labelledby="posts-heading">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading" data-reveal>
           <span class="section-label">Featured</span>
           <h2 id="posts-heading">Latest from the briefing.</h2>
           <p>Recent issues — sharp reads you can finish before your coffee gets cold.</p>
         </div>
 
-        <div class="grid-3" data-articles-grid>
-          <article class="card post-card">
+        <div class="posts-grid" data-articles-grid>
+          <article class="card post-card post-featured" data-reveal>
             <span class="post-tag">Health Tech</span>
+            <div class="post-meta">
+              <time datetime="2026-06-05">Jun 5, 2026</time>
+              <span>5 min read</span>
+            </div>
             <h3>Why ambient clinical AI just crossed the adoption chasm</h3>
-            <p class="summary">Three health systems went live in Q1. Here's what changed in procurement, liability, and clinician buy-in.</p>
+            <p class="summary">Three health systems went live in Q1. Here's what changed in procurement, liability, and clinician buy-in — and what it means for the next wave of deployments.</p>
             <a class="read-more" href="#" aria-label="Read: Why ambient clinical AI just crossed the adoption chasm">
               Read more
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -175,8 +294,11 @@
             </a>
           </article>
 
-          <article class="card post-card">
+          <article class="card post-card" data-reveal data-reveal-delay="1">
             <span class="post-tag">Policy</span>
+            <div class="post-meta">
+              <time datetime="2026-05-29">May 29, 2026</time>
+            </div>
             <h3>CMS's new prior-auth rule: what operators need to know</h3>
             <p class="summary">The 72-hour mandate hits July 1. We mapped compliance gaps for mid-size provider groups still on legacy workflows.</p>
             <a class="read-more" href="#" aria-label="Read: CMS's new prior-auth rule">
@@ -188,8 +310,11 @@
             </a>
           </article>
 
-          <article class="card post-card">
+          <article class="card post-card" data-reveal data-reveal-delay="2">
             <span class="post-tag">Markets</span>
+            <div class="post-meta">
+              <time datetime="2026-05-22">May 22, 2026</time>
+            </div>
             <h3>Biotech Q1 in 6 charts: who's funding, who's folding</h3>
             <p class="summary">Series A volume held steady while crossover rounds dried up. The therapeutic areas still pulling term sheets.</p>
             <a class="read-more" href="#" aria-label="Read: Biotech Q1 in 6 charts">
@@ -206,7 +331,7 @@
 
     <section id="subscribe" class="newsletter-section" aria-labelledby="subscribe-heading">
       <div class="container">
-        <div class="newsletter-panel">
+        <div class="newsletter-panel" data-reveal>
           <h2 id="subscribe-heading">Get smarter about health tech — every Thursday.</h2>
           <p class="subtitle">Join 2,400+ readers. Free forever. Unsubscribe anytime.</p>
 
@@ -225,48 +350,47 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <a class="brand" href="#top" aria-label="Lumen home">
-            <img class="brand-logo" src="assets/images/logo.svg" width="38" height="38" alt="" />
+            <img class="brand-logo" src="assets/images/logo.svg" width="36" height="36" alt="" />
             <span>Lumen</span>
           </a>
-          <p>Your weekly dose of health tech intelligence.</p>
+          <p>Your weekly dose of health tech intelligence — sharp, concise, and built for the people shaping the future of healthcare.</p>
         </div>
 
-        <div class="footer-nav">
-          <div class="footer-nav-group">
-            <h4>Navigate</h4>
-            <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#topics">Topics</a></li>
-              <li><a href="#posts">Posts</a></li>
-              <li><a href="#subscribe">Subscribe</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav-group">
-            <h4>Connect</h4>
-            <ul class="social-links">
-              <li>
-                <a href="#" aria-label="X (Twitter)" title="X (Twitter)">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" aria-label="LinkedIn" title="LinkedIn">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.127 0 2.062 2.062 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" aria-label="Substack" title="Substack">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div class="footer-nav-group">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#topics">Topics</a></li>
+            <li><a href="#posts">Posts</a></li>
+            <li><a href="#subscribe">Subscribe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <h4>Connect</h4>
+          <ul class="social-links">
+            <li>
+              <a href="#" aria-label="X (Twitter)" title="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.127 0 2.062 2.062 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Substack" title="Substack">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -279,5 +403,6 @@
 
   <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/reveal.js" defer></script>
 </body>
 </html>
